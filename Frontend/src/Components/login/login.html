@@ -1,0 +1,12 @@
+
+
+<div class="loginPage">
+  <div class="loginFields">
+      <div class="emailDiv loginInputs"><p class="text">Email/Username</p><input type="text" class="email inputField" placeholder="Email" [(ngModel)]="email"></div>
+      <div class="passwordDiv loginInputs"><p class="text">Password</p><input type="text" class="password inputField" placeholder="Password" [(ngModel)]="password"></div>
+      <div class="buttonDiv">
+        <button class="loginButton" (click)="onSubmit()">Log In</button>
+        <a class="text signInText">Sign In</a>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+
+
+<div class="categoryProducts">
+  <div class="categoryBar">
+    @for (category of categories(); track category.name) {
+      <a class="categories"  [routerLink]="['category', category.id]">{{ category.name }}</a>
+    }
+  </div>
+  <div class="productPage">
+    <router-outlet></router-outlet>
+  </div>
+</div>

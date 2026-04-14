@@ -1,0 +1,41 @@
+body{
+  background-color: #181919;
+}
+
+.homePage{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textBox{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleText{
+  font-size: 40px;
+}
+
+.descriptionText{
+  font-size: 30px;
+  text-align: center;
+}
+
+.text{
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.bi{
+  font-size: 200px;
+}

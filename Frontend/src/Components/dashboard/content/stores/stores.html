@@ -1,0 +1,11 @@
+
+
+
+<div class="storeList">
+  @for (store of stores(); track store.name) {
+    <app-shop-card [store]="store"></app-shop-card>
+  }
+</div>
+
+
+

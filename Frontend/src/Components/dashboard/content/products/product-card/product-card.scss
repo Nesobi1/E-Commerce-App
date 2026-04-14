@@ -1,0 +1,35 @@
+.card{
+  display: flex;
+  width: 300px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border-color: black;
+  border-width: 5px;
+  opacity: 80%;
+  background: rgba(255, 255, 255, 0.47);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.cardText{
+  text-align: center;
+  width: 150px;
+  font-family: "Noto Sans Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 462;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.detailButton{
+  border-radius: 10px;
+  border: none;
+  margin-top: 150px;
+  font-size: 20px;
+}

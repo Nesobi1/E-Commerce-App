@@ -1,0 +1,19 @@
+.navbarDiv{
+  background-color: #222323;
+  height: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar{
+  width: 40%;
+  height: 50%;
+  border-radius: 20px;
+  padding-left: 20px;
+  background-color: #282828;
+  border: none;
+  color: #C7C7C7;
+  box-shadow: 5px 5px 10px black;
+}

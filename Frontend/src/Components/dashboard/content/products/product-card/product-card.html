@@ -1,0 +1,9 @@
+
+
+<div class="card">
+    <div class="cardText">
+      <h3>{{ product.name  }}</h3>
+      <p>{{ product.unitPrice }}</p>
+      <button class="detailButton cardText" [routerLink]="['/dashboard/product', product.id]">Get Details</button>
+    </div>
+</div>

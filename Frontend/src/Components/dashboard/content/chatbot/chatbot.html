@@ -1,0 +1,16 @@
+
+<div class="chatbotPage #messagesContainer">
+  <div class="messages">
+    <div class="spacerDiv"></div>
+    @for(message of messages(); track $index){
+      <p [class]="message.role === 'user' ? 'userMessage' : 'aiMessage'">{{ message.text }}</p>
+    }
+  </div>
+
+
+  <div class="inputField">
+    <input class="input" type="text" [(ngModel)]="text">
+    <button class="sendTextButton" (click)="onSend()"><i class="bi bi-arrow-right"></i></button>
+  </div>
+
+</div>

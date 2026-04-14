@@ -1,0 +1,27 @@
+.categoryProducts{
+  display: flex;
+  height: 100%;
+}
+
+.categoryBar{
+  width: 150px;
+  height: 100%;
+  background-color: #151616;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  gap: 20px;
+}
+
+.productPage{
+  height: 100%;
+  flex: 1;
+}
+
+.categories{
+  text-decoration: none;
+  color: #C7C7C7;
+  font-size: 20px;
+}

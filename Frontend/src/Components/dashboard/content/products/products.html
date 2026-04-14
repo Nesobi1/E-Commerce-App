@@ -1,0 +1,10 @@
+
+
+<div class="productList">
+  @for (product of products(); track product.name) {
+    <app-product-card [product]="product"></app-product-card>
+  }
+</div>
+
+
+

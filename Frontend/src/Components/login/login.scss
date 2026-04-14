@@ -1,0 +1,87 @@
+.loginPage{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: calc((100vh - 200px)/2);
+  height: 200px;
+
+}
+
+.loginFields{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #464E54;
+  width: 400px;
+  height: 450px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 20px;
+  opacity: 80%;
+  box-shadow: 10px 15px 10px black;
+}
+
+.emailDiv{
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputField{
+  height: 30px;
+  width: 250px;
+  border-radius: 10px;
+  padding-left: 10px;
+  background-color: #282828;
+  border: none;
+  color: #C7C7C7;
+  box-shadow: 5px 5px 10px black;
+}
+
+.inputField:focus{
+  outline: none;
+}
+
+.passwordDiv{
+  margin-top: 20px;
+  margin-bottom: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text{
+  padding-left: 10px;
+  margin: 0;
+  margin-bottom: 4px;
+  width: 150px;
+  font-family: "Noto Sans Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 462;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+
+}
+
+.signInText{
+  padding-left: 0px;
+  align-items: center;
+}
+
+.buttonDiv{
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginButton{
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 5px 5px 10px black;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,58 @@
+
+.chatbotPage{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+}
+
+.messages{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+}
+
+.spacerDiv{
+  display: flex;
+  flex: 1;
+}
+
+.inputField{
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-self: end;
+  align-self: center;
+}
+
+.input{
+  height: 25px;
+  width: 500px;
+  border-radius: 10px;
+  border: solid;
+}
+
+.input:focus{
+  outline: none;
+}
+
+.sendTextButton{
+  border-radius: 10px;
+  border: none;
+  width: 40px;
+}
+
+.userMessage{
+  text-align: end;
+  font-size: 30px;
+  margin-right: 10px;
+  color: #C7C7C7;
+}
+
+.aiMessage{
+  text-align: start;
+  font-size: 30px;
+  margin-left: 10px;
+  color: #C7C7C7;
+}

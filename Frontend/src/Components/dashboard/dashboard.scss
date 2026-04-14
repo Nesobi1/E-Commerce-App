@@ -1,0 +1,40 @@
+.layout{
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar{
+  width: 150px;
+  height: 100vh;
+  position: sticky;
+}
+
+.menu{
+  flex: 1;
+
+}
+
+.contentWrapper{
+  height: 100%;
+  background: transparent;
+  border-top-left-radius: 50px;
+  background-color: #181919;
+  border-color: #181919;
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.5);
+  overflow: auto;
+
+}
+
+.content{
+  height: 100%;
+   overflow: auto;
+}
+
+.header{
+  position: sticky;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+

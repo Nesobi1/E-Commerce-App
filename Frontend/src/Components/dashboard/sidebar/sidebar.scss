@@ -1,0 +1,50 @@
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 150px;
+  background-color: #222323;
+}
+
+.logo{
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sidebarContent{
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+}
+
+.links{
+  color: #C7C7C7;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.linkDiv{
+  border-bottom: 2px solid #363837;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30%;
+}
+
+.firstLinkDiv{
+  border-top: 2px solid #363837;
+  padding-top: 30%;
+}
+
+.bi{
+  font-size: 100px;
+}
+
+
