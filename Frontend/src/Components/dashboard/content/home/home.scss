@@ -1,41 +1,42 @@
-body{
-  background-color: #181919;
-}
-
-.homePage{
+.homePage {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.textBox{
+.textBox {
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.title{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.titleText{
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  color: white;
   font-size: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px var(--shadow);
 }
 
-.descriptionText{
+.titleText {
+  font-size: 40px;
+  color: var(--text-primary);
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+}
+
+.descriptionText {
   font-size: 30px;
   text-align: center;
-}
-
-.text{
+  color: var(--text-secondary);
   font-family: 'Times New Roman', Times, serif;
-}
-
-.bi{
-  font-size: 200px;
+  margin: 0;
 }

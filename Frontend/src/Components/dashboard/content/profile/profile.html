@@ -1,0 +1,189 @@
+<div class="profilePage">
+  <div class="profileContainer">
+
+    <!-- Avatar -->
+    <div class="avatarSection">
+      <div class="avatar">{{ getInitials() }}</div>
+      <h2 class="displayName">{{ username }}</h2>
+      <span class="roleBadge">{{ role }}</span>
+    </div>
+
+    <!-- Complete profile banner for new users -->
+    @if (role === 'CUSTOMER' && !customerProfile()) {
+      <div class="completeBanner">
+        <span>👋 Complete your profile to get the full experience</span>
+        <button class="completeBtn" (click)="openCompleteProfile()">Complete Profile</button>
+      </div>
+    }
+
+    <!-- OAuth gender banner -->
+    @if (gender === '' || gender === 'unknown') {
+      <div class="completeBanner">
+        <span>Please select your gender to complete your account setup</span>
+        <button class="completeBtn" (click)="openGenderPicker()">Set Gender</button>
+      </div>
+    }
+
+    <!-- Account Info -->
+    <div class="infoSection">
+      <div class="sectionHeader">
+        <h3 class="sectionTitle">Account Info</h3>
+        <button class="editBtn" (click)="toggleEditAccount()">
+          {{ editingAccount ? 'Cancel' : 'Edit' }}
+        </button>
+      </div>
+
+      @if (!editingAccount) {
+        <div class="infoGrid">
+          <div class="infoItem">
+            <span class="infoLabel">Username</span>
+            <span class="infoValue">{{ username }}</span>
+          </div>
+          <div class="infoItem">
+            <span class="infoLabel">Email</span>
+            <span class="infoValue">{{ email }}</span>
+          </div>
+          <div class="infoItem">
+            <span class="infoLabel">Role</span>
+            <span class="infoValue">{{ role }}</span>
+          </div>
+          <div class="infoItem">
+            <span class="infoLabel">Gender</span>
+            <span class="infoValue">{{ getGenderLabel() }}</span>
+          </div>
+        </div>
+      } @else {
+        <div class="editForm">
+          <div class="formRow">
+            <label>Username</label>
+            <input type="text" [(ngModel)]="editAccount.username" />
+          </div>
+          <div class="formRow">
+            <label>Gender</label>
+            <select [(ngModel)]="editAccount.gender">
+              <option value="true">Male</option>
+              <option value="false">Female</option>
+            </select>
+          </div>
+          <div class="formError" *ngIf="accountError">{{ accountError }}</div>
+          <div class="formActions">
+            <button class="saveBtn" (click)="saveAccount()" [disabled]="savingAccount">
+              {{ savingAccount ? 'Saving...' : 'Save Changes' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Customer Profile -->
+    @if (role === 'CUSTOMER' && customerProfile()) {
+      <div class="infoSection">
+        <div class="sectionHeader">
+          <h3 class="sectionTitle">Customer Profile</h3>
+          <button class="editBtn" (click)="toggleEditProfile()">
+            {{ editingProfile ? 'Cancel' : 'Edit' }}
+          </button>
+        </div>
+
+        @if (!editingProfile) {
+          <div class="infoGrid">
+            <div class="infoItem">
+              <span class="infoLabel">Age</span>
+              <span class="infoValue">{{ customerProfile().age }}</span>
+            </div>
+            <div class="infoItem">
+              <span class="infoLabel">City</span>
+              <span class="infoValue">{{ customerProfile().city }}</span>
+            </div>
+            <div class="infoItem">
+              <span class="infoLabel">Membership</span>
+              <span class="membershipBadge" [ngClass]="customerProfile().membershipType?.toLowerCase()">
+                {{ customerProfile().membershipType }}
+              </span>
+            </div>
+            <div class="infoItem">
+              <span class="infoLabel">Demographic</span>
+              <span class="infoValue">{{ customerProfile().demographic }}</span>
+            </div>
+          </div>
+        } @else {
+          <div class="editForm">
+            <div class="formRow">
+              <label>Age</label>
+              <input type="number" [(ngModel)]="editProfile.age" min="1" max="120" />
+            </div>
+            <div class="formRow">
+              <label>City</label>
+              <input type="text" [(ngModel)]="editProfile.city" />
+            </div>
+            <div class="formError" *ngIf="profileError">{{ profileError }}</div>
+            <div class="formActions">
+              <button class="saveBtn" (click)="saveProfile()" [disabled]="savingProfile">
+                {{ savingProfile ? 'Saving...' : 'Save Changes' }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="actions">
+      <button class="logoutBtn" (click)="logout()">Log Out</button>
+    </div>
+  </div>
+
+  <!-- Complete Profile Modal -->
+  @if (showCompleteModal) {
+    <div class="modalOverlay" (click)="closeModals()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <h3>Complete Your Profile</h3>
+        <div class="formRow">
+          <label>Age</label>
+          <input type="number" [(ngModel)]="completeForm.age" min="1" max="120" />
+        </div>
+        <div class="formRow">
+          <label>City</label>
+          <input type="text" [(ngModel)]="completeForm.city" />
+        </div>
+        <div class="formRow">
+          <label>Membership</label>
+          <select [(ngModel)]="completeForm.membershipType">
+            <option value="Bronze">Bronze</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+          </select>
+        </div>
+        <div class="formError" *ngIf="completeError">{{ completeError }}</div>
+        <div class="formActions">
+          <button class="cancelBtn" (click)="closeModals()">Cancel</button>
+          <button class="saveBtn" (click)="submitCompleteProfile()" [disabled]="savingComplete">
+            {{ savingComplete ? 'Saving...' : 'Complete Profile' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Gender Picker Modal -->
+  @if (showGenderModal) {
+    <div class="modalOverlay" (click)="closeModals()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <h3>Select Your Gender</h3>
+        <div class="genderPicker">
+          <button class="genderOption" [class.selected]="selectedGender === 'true'"
+                  (click)="selectedGender = 'true'">Male</button>
+          <button class="genderOption" [class.selected]="selectedGender === 'false'"
+                  (click)="selectedGender = 'false'">Female</button>
+        </div>
+        <div class="formError" *ngIf="genderError">{{ genderError }}</div>
+        <div class="formActions">
+          <button class="cancelBtn" (click)="closeModals()">Cancel</button>
+          <button class="saveBtn" (click)="saveGender()" [disabled]="savingGender">
+            {{ savingGender ? 'Saving...' : 'Save' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

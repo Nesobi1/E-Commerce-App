@@ -1,9 +1,16 @@
 
 
-
 <div class="storeList">
-  @for (store of stores(); track store.name) {
-    <app-shop-card [store]="store"></app-shop-card>
+  @if (loading()) {
+    <p class="loadingText">Loading stores...</p>
+  } @else {
+    @for (store of stores(); track store.id) {
+      <app-shop-card
+        [store]="store"
+        [isAdmin]="isAdmin"
+        (onDelete)="deleteStore($event)"
+      ></app-shop-card>
+    }
   }
 </div>
 

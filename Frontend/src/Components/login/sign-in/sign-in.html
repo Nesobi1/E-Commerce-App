@@ -1,0 +1,72 @@
+
+
+
+<div class="signupPage">
+  <div class="signupCard">
+
+    <div class="signupHeader">
+      <div class="logoMark">abc</div>
+      <h1>Create account</h1>
+      <p>Join us today</p>
+    </div>
+
+    @if (fieldEmpty) {
+      <div class="errorMsg">{{ errorMessage }}</div>
+    }
+    @if (shortPassword) {
+      <div class="errorMsg">Password must be at least 8 characters</div>
+    }
+
+    <div class="formGroup">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" placeholder="you@example.com" />
+    </div>
+
+    <div class="formGroup">
+      <label>Username</label>
+      <input type="text" [(ngModel)]="username" placeholder="johndoe" />
+    </div>
+
+    <div class="formGroup">
+      <label>Password</label>
+      <div class="passwordWrapper">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          placeholder="••••••••"
+        />
+        <button class="togglePassword" (click)="showPassword = !showPassword">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="formRow">
+      <div class="formGroup">
+        <label>Role</label>
+        <select [(ngModel)]="role">
+          <option value="" disabled selected>Select</option>
+          <option value="CUSTOMER">Customer</option>
+          <option value="CORPORATE">Corporate</option>
+        </select>
+      </div>
+
+      <div class="formGroup">
+        <label>Gender</label>
+        <select [(ngModel)]="gender">
+          <option value="" disabled selected>Select</option>
+          <option value="true">Male</option>
+          <option value="false">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="signupBtn" (click)="register()">Create Account</button>
+
+    <p class="loginText">
+      Already have an account?
+      <a routerLink="/login">Sign In</a>
+    </p>
+
+  </div>
+</div>

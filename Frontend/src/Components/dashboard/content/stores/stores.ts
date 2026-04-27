@@ -1,8 +1,8 @@
 import { StoresService } from '../../../../Services/stores.service';
+import { AuthService } from '../../../../Services/auth';
 import { Component, OnInit, signal } from '@angular/core';
 import { StoreCardComponent } from './store-card/store-card';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-shops',
@@ -11,19 +11,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './stores.html',
   styleUrl: './stores.scss',
 })
-export class StoreComponent implements OnInit{
+export class StoreComponent implements OnInit {
   stores = signal<any[]>([]);
-  loading = true;
+  loading = signal<boolean>(true);
+  isAdmin = false;
 
- constructor(private storesService: StoresService){}
+  constructor(
+    private storesService: StoresService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
+    this.isAdmin = this.authService.getRole() === 'ADMIN';
     this.storesService.getAllStores().subscribe({
       next: (data) => {
         this.stores.set(data);
-        this.loading = false;
-        console.log('Data received:', data);
+        this.loading.set(false);
       }
+    });
+  }
+
+  deleteStore(id: number) {
+    this.storesService.deleteStore(id).subscribe(() => {
+      this.stores.set(this.stores().filter(s => s.id !== id));
     });
   }
 }

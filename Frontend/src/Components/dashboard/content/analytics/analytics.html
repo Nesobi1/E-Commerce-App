@@ -1,0 +1,112 @@
+<div class="analyticsPage">
+  <div class="pageHeader">
+    <h1>
+      @if (role === 'ADMIN') { Site Analytics }
+      @else if (role === 'CORPORATE') { Store Analytics }
+      @else { My Spending Analytics }
+    </h1>
+    <p>
+      @if (role === 'ADMIN') { Full platform overview }
+      @else if (role === 'CORPORATE') { Your store performance }
+      @else { Your personal purchase history }
+    </p>
+  </div>
+
+  <div class="loadingState" [style.display]="loading() ? 'block' : 'none'">
+    Loading analytics...
+  </div>
+
+  <div [style.display]="loading() ? 'none' : 'block'">
+    <div class="kpiRow">
+      @if (role === 'ADMIN') {
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Revenue</span>
+          <span class="kpiValue">${{ stats().totalRevenue | number:'1.2-2' }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Orders</span>
+          <span class="kpiValue">{{ stats().totalOrders }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Customers</span>
+          <span class="kpiValue">{{ stats().totalCustomers }}</span>
+        </div>
+      }
+      @else if (role === 'CORPORATE') {
+        <div class="kpiCard">
+          <span class="kpiLabel">Store Revenue</span>
+          <span class="kpiValue">${{ stats().totalRevenue | number:'1.2-2' }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Orders</span>
+          <span class="kpiValue">{{ stats().totalOrders }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Unique Customers</span>
+          <span class="kpiValue">{{ stats().totalCustomers }}</span>
+        </div>
+      }
+      @else {
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Spent</span>
+          <span class="kpiValue">${{ stats().totalSpent | number:'1.2-2' }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Total Orders</span>
+          <span class="kpiValue">{{ stats().totalOrders }}</span>
+        </div>
+        <div class="kpiCard">
+          <span class="kpiLabel">Items Purchased</span>
+          <span class="kpiValue">{{ stats().totalItems }}</span>
+        </div>
+      }
+    </div>
+
+<div class="chartsGrid">
+  @if (role === 'CUSTOMER') {
+    <div class="chartCard">
+      <canvas #chart1></canvas>
+    </div>
+    <div class="chartCard orderHistoryCard">
+      <h3 class="orderHistoryTitle">Purchase History</h3>
+      <div class="orderList">
+        @for (order of orderHistory(); track order.orderId) {
+          <div class="orderRow">
+            <div class="orderLeft">
+              <span class="orderDate">{{ order.date }}</span>
+              <span class="orderPayment">{{ order.paymentMethod }}</span>
+            </div>
+            <div class="orderRight">
+              <span class="orderTotal">${{ order.total | number:'1.2-2' }}</span>
+              <span class="orderStatus" [class.completed]="order.status === 'COMPLETED'"
+                                        [class.pending]="order.status === 'PENDING'">
+                {{ order.status }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+      <div class="chartCard">
+        <canvas #chart2></canvas>
+      </div>
+      <div class="chartCard">
+        <canvas #chart3></canvas>
+      </div>
+    } @else {
+      <div class="chartCard">
+        <canvas #chart1></canvas>
+      </div>
+      <div class="chartCard">
+        <canvas #chart4></canvas>
+      </div>
+      <div class="chartCard">
+        <canvas #chart2></canvas>
+      </div>
+      <div class="chartCard">
+        <canvas #chart3></canvas>
+      </div>
+    }
+  </div>
+  </div>
+</div>

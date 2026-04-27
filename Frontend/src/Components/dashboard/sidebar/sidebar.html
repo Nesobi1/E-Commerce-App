@@ -4,18 +4,33 @@
     <div class="firstLinkDiv linkDiv">
       <a class="links" routerLink="home">Home</a>
     </div>
-    <div class="linkDiv">
-      <a class="links" routerLink="stores">Stores</a>
-    </div>
+
+    @if (role !== 'CORPORATE') {
+      <div class="linkDiv">
+        <a class="links" routerLink="stores">Stores</a>
+      </div>
+    }
+
     <div class="linkDiv">
       <a class="links" routerLink="products">Products</a>
     </div>
+
+    @if (role === 'ADMIN') {
+      <div class="linkDiv">
+        <a class="links" routerLink="user-management">Users</a>
+      </div>
+    }
+
+    @if (role === 'CORPORATE' || role === 'ADMIN') {
+      <div class="linkDiv">
+        <a class="links" routerLink="review-management">Reviews</a>
+      </div>
+    }
+
     <div class="linkDiv">
-      <a class="links" routerLink="reviews">Reviews</a>
+      <a class="links" routerLink="analytics">Analytics</a>
     </div>
-    <div class="linkDiv">
-      <a class="links" routerLink="analytics">Analtyitcs</a>
-    </div>
+
     <div class="linkDiv">
       <a class="links" routerLink="chatbot">Chatbot</a>
     </div>

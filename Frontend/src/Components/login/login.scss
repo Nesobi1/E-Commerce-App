@@ -1,87 +1,181 @@
-.loginPage{
-  justify-content: center;
-  align-items: center;
+.loginPage {
+  min-height: 100vh;
+  background: var(--bg-base);
   display: flex;
-  margin-top: calc((100vh - 200px)/2);
-  height: 200px;
-
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
-.loginFields{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #464E54;
-  width: 400px;
-  height: 450px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+.loginCard {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 20px;
-  opacity: 80%;
-  box-shadow: 10px 15px 10px black;
-}
-
-.emailDiv{
-  margin-bottom: 20px;
+  padding: 40px 36px;
+  box-shadow: 0 24px 60px var(--shadow);
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.inputField{
-  height: 30px;
-  width: 250px;
-  border-radius: 10px;
-  padding-left: 10px;
-  background-color: #282828;
-  border: none;
-  color: #C7C7C7;
-  box-shadow: 5px 5px 10px black;
-}
-
-.inputField:focus{
-  outline: none;
-}
-
-.passwordDiv{
-  margin-top: 20px;
-  margin-bottom: 150px;
-  display: flex;
-  flex-direction: column;
-}
-
-.text{
-  padding-left: 10px;
-  margin: 0;
-  margin-bottom: 4px;
-  width: 150px;
-  font-family: "Noto Sans Display", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 462;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-
-}
-
-.signInText{
-  padding-left: 0px;
-  align-items: center;
-}
-
-.buttonDiv{
-  margin-top: 20px;
+.loginHeader {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 8px;
+
+  .logoMark {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+  }
 }
 
-.loginButton{
-  height: 35px;
-  width: 100px;
+.socialBtn {
+  width: 100%;
+  padding: 11px;
   border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: var(--bg-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+}
+
+.errorMsg {
+  background: rgba(139, 51, 51, 0.2);
+  border: 1px solid rgba(139, 51, 51, 0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #c48a8a;
+  font-size: 13px;
+  text-align: center;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &:focus { border-color: var(--text-muted); }
+    &::placeholder { color: var(--text-muted); }
+  }
+}
+
+.passwordWrapper {
+  position: relative;
+
+  input { padding-right: 44px; }
+}
+
+.togglePassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
   border: none;
-  box-shadow: 5px 5px 10px black;
-  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  line-height: 1;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+
+  &:hover {
+    background: var(--border);
+    border-color: var(--text-muted);
+  }
+}
+
+.signupText {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 0;
+
+  a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover { color: var(--text-primary); }
+  }
 }

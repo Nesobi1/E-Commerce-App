@@ -1,0 +1,344 @@
+.profilePage {
+  min-height: 100%;
+  background: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  padding: 40px 24px 60px;
+  box-sizing: border-box;
+}
+
+.profileContainer {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.displayName {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.roleBadge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(100, 100, 100, 0.2);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.completeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+
+  .completeBtn {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    &:hover { opacity: 0.85; }
+  }
+}
+
+
+.infoSection {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.editBtn {
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoValue {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.membershipBadge {
+  display: inline-block;
+  width: fit-content;
+  padding: 3px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.gold {
+  background: rgba(184, 142, 48, 0.2);
+  color: #c9a84c;
+  border: 1px solid rgba(184, 142, 48, 0.4);
+}
+
+.silver {
+  background: rgba(150, 150, 160, 0.2);
+  color: #a8a8b8;
+  border: 1px solid rgba(150, 150, 160, 0.4);
+}
+
+.bronze {
+  background: rgba(160, 100, 60, 0.2);
+  color: #b07844;
+  border: 1px solid rgba(160, 100, 60, 0.4);
+}
+
+.standard {
+  background: rgba(100, 100, 100, 0.2);
+  color: var(--text-secondary);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  input, select {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    padding: 9px 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    &:focus { outline: none; border-color: var(--text-secondary); }
+  }
+
+  select option { background: var(--bg-primary); }
+}
+
+.formError {
+  font-size: 0.82rem;
+  color: #fca5a5;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.saveBtn {
+  padding: 8px 20px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.85; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.cancelBtn {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+}
+
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.logoutBtn {
+  padding: 10px 32px;
+  background: rgba(139, 51, 51, 0.2);
+  border: 1px solid rgba(139, 51, 51, 0.5);
+  border-radius: 10px;
+  color: #c48a8a;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background: rgba(139, 51, 51, 0.4);
+    border-color: #8b3333;
+    color: #e0a0a0;
+  }
+}
+
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .formRow { margin: 0; }
+
+  .formActions { margin-top: 4px; }
+}
+
+.genderPicker {
+  display: flex;
+  gap: 12px;
+}
+
+.genderOption {
+  flex: 1;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+  &.selected {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+}
+

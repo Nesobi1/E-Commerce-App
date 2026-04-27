@@ -1,40 +1,229 @@
-.layout{
+.layout {
   display: flex;
   height: 100vh;
 }
 
-.sidebar{
+.sidebar {
   width: 150px;
   height: 100vh;
   position: sticky;
 }
 
-.menu{
+.menu {
   flex: 1;
-
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
 }
 
-.contentWrapper{
-  height: 100%;
-  background: transparent;
-  border-top-left-radius: 50px;
-  background-color: #181919;
-  border-color: #181919;
-  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.5);
-  overflow: auto;
-
-}
-
-.content{
-  height: 100%;
-   overflow: auto;
-}
-
-.header{
+.header {
   position: sticky;
   right: 0;
   top: 0;
   width: 100%;
+  z-index: 100;
+  background-color: var(--bg-primary);
 }
+
+.contentWrapper {
+  flex: 1;
+  background-color: var(--bg-tertiary);
+  border-top-left-radius: 50px;
+  box-shadow: inset 5px 0 10px var(--shadow);
+  overflow: auto;
+  z-index: 1;
+  position: relative;
+}
+
+.content {
+  height: 100%;
+  overflow: auto;
+}
+
+.completeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
+
+  .completeBtn {
+    padding: 0.5rem 1.2rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 1rem;
+    &:hover { background: #ddd; }
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .editBtn {
+    padding: 0.35rem 1rem;
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all 0.2s;
+    &:hover { border-color: #888; color: #fff; }
+  }
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  .formRow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label { font-size: 0.8rem; color: #888; }
+
+    input, select {
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      color: #fff;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      &:focus { outline: none; border-color: #555; }
+    }
+
+    select option { background: #1a1a1a; }
+  }
+
+  .formError { font-size: 0.82rem; color: #fca5a5; }
+
+  .formActions { display: flex; justify-content: flex-end; margin-top: 0.5rem; }
+
+  .saveBtn {
+    padding: 0.55rem 1.4rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    &:hover { background: #ddd; }
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  .modal {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+
+    h3 { margin: 0 0 1.5rem; font-size: 1.1rem; }
+
+    .formRow {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 1rem;
+
+      label { font-size: 0.8rem; color: #888; }
+
+      input, select {
+        background: #0d0d0d;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        color: #fff;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.9rem;
+        &:focus { outline: none; border-color: #555; }
+      }
+
+      select option { background: #1a1a1a; }
+    }
+
+    .genderPicker {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+
+      .genderOption {
+        flex: 1;
+        padding: 0.75rem;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 10px;
+        color: #aaa;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+        &:hover { border-color: #666; color: #fff; }
+        &.selected { border-color: #fff; color: #fff; background: #222; }
+      }
+    }
+
+    .formError { font-size: 0.82rem; color: #fca5a5; margin-bottom: 1rem; }
+
+    .formActions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+
+      .cancelBtn {
+        padding: 0.55rem 1.2rem;
+        background: transparent;
+        border: 1px solid #333;
+        color: #888;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.88rem;
+        &:hover { background: #1a1a1a; color: #fff; }
+      }
+
+      .saveBtn {
+        padding: 0.55rem 1.4rem;
+        background: #fff;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.88rem;
+        font-weight: 600;
+        &:hover { background: #ddd; }
+        &:disabled { opacity: 0.4; cursor: not-allowed; }
+      }
+    }
+  }
+}
+
+
 
 

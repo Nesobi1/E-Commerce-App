@@ -4,13 +4,10 @@ import com.site.backend.model.User;
 import com.site.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.stream.Collectors;
 import com.site.backend.dto.LoginDTO;
 import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import com.site.backend.security.JwtUtil;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,11 +28,16 @@ public class AuthController {
             return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getId(),
+                user.getRoleType(),
+                user.getUsername(),
+                String.valueOf(user.getGender())
+        );
 
         return ResponseEntity.ok(Map.of(
-                "token", token,
-                "userId", user.getId(),
+                "token",   token,
                 "message", "Login successful"
         ));
     }

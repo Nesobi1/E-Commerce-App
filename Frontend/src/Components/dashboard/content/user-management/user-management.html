@@ -1,0 +1,90 @@
+<div class="umPage">
+
+  <div class="umHeader">
+    <div>
+      <h1 class="umTitle">User Management</h1>
+      <p class="umSub">Manage all platform users</p>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="statsGrid">
+    <div class="statCard">
+      <span class="statNum">{{ stats.total }}</span>
+      <span class="statLabel">Total Users</span>
+    </div>
+    <div class="statCard">
+      <span class="statNum">{{ stats.customers }}</span>
+      <span class="statLabel">Customers</span>
+    </div>
+    <div class="statCard">
+      <span class="statNum">{{ stats.corporate }}</span>
+      <span class="statLabel">Corporate</span>
+    </div>
+    <div class="statCard">
+      <span class="statNum">{{ stats.admins }}</span>
+      <span class="statLabel">Admins</span>
+    </div>
+    <div class="statCard suspended">
+      <span class="statNum">{{ stats.suspended }}</span>
+      <span class="statLabel">Suspended</span>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filterRow">
+    <button class="filterBtn" [class.active]="filterRole === 'ALL'"       (click)="filterRole = 'ALL'">All</button>
+    <button class="filterBtn" [class.active]="filterRole === 'CUSTOMER'"  (click)="filterRole = 'CUSTOMER'">Customers</button>
+    <button class="filterBtn" [class.active]="filterRole === 'CORPORATE'" (click)="filterRole = 'CORPORATE'">Corporate</button>
+    <button class="filterBtn" [class.active]="filterRole === 'ADMIN'"     (click)="filterRole = 'ADMIN'">Admins</button>
+  </div>
+
+  @if (loading()) {
+    <div class="emptyMsg">Loading users...</div>
+  }
+
+  @if (!loading() && filteredUsers.length === 0) {
+    <div class="emptyMsg">No users found.</div>
+  }
+
+  <!-- User list -->
+  @for (user of filteredUsers; track user.id) {
+    <div class="userCard" [class.isSuspended]="user.suspended">
+
+      <div class="userLeft">
+        <div class="avatar" [class.suspendedAvatar]="user.suspended">
+          {{ getInitial(user.username) }}
+        </div>
+        <div class="userInfo">
+          <span class="userName">{{ user.username || 'No username' }}</span>
+          <span class="userEmail">{{ user.email }}</span>
+          <div class="userMeta">
+            <span class="roleBadge" [ngClass]="getRoleBadgeClass(user.roleType)">
+              {{ user.roleType }}
+            </span>
+            @if (user.suspended) {
+              <span class="suspendedBadge">Suspended</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="userActions">
+        @if (confirmDeleteId === user.id) {
+          <div class="confirmRow">
+            <span class="confirmText">Delete this user?</span>
+            <button class="confirmYes" (click)="deleteUser(user.id)">Yes, delete</button>
+            <button class="confirmNo"  (click)="cancelDelete()">Cancel</button>
+          </div>
+        } @else {
+          <button class="suspendBtn" (click)="toggleSuspend(user)">
+            {{ user.suspended ? 'Unsuspend' : 'Suspend' }}
+          </button>
+          <button class="deleteBtn" (click)="confirmDelete(user.id)">Delete</button>
+        }
+      </div>
+
+    </div>
+  }
+
+</div>

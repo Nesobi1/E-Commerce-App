@@ -1,27 +1,102 @@
-.categoryProducts{
+.categoryProducts {
   display: flex;
   height: 100%;
+  overflow: hidden;
 }
 
-.categoryBar{
-  width: 150px;
+.categoryBar {
+  width: 170px;
+  min-width: 170px;
   height: 100%;
-  background-color: #151616;
-  justify-content: start;
-  align-items: center;
+  background-color: var(--bg-tertiary);
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
-  gap: 20px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
 }
 
-.productPage{
-  height: 100%;
-  flex: 1;
-}
-
-.categories{
+.categoryLink {
   text-decoration: none;
-  color: #C7C7C7;
-  font-size: 20px;
+  transition: all 0.15s;
+
+  &.active {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card);
+  }
+
+  &:hover {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary);
+  }
+}
+
+.allLink {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  margin: 0 8px 8px;
+  border-radius: 6px;
+  display: block;
+}
+
+.parentLink {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  margin: 2px 8px 0;
+  border-radius: 6px;
+  display: block;
+}
+
+.childGroup {
+  position: relative;
+  margin-left: 20px;
+  margin-bottom: 4px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    bottom: 4px;
+    width: 1px;
+    background-color: var(--border);
+  }
+}
+
+.childLink {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 12px 5px 20px;
+  margin: 1px 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    width: 8px;
+    height: 1px;
+    background-color: var(--border);
+  }
+}
+
+.productPage {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
 }

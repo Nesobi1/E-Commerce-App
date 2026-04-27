@@ -1,8 +1,13 @@
-.storeList{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 75px;
+.storeList {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  gap: 24px;
+  row-gap: 30%;
+  padding: 4rem;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+}
+
+.loadingText {
+  color: var(--text-secondary);
+  font-size: 16px;
 }

@@ -2,12 +2,10 @@
 
 <div class="homePage">
   <div class="textBox">
-    <div class="title">
-      <i class="bi bi-person-circle"></i>
-      <p class="text titleText">HELLO {{ username }}</p>
+    <div class="avatar" [style.background]="avatarColor">
+      {{ username.charAt(0).toUpperCase() }}
     </div>
-    <div class="description">
-      <p class="text descriptionText">Welcome to your page</p>
-    </div>
+    <p class="titleText">Hello {{ username }}</p>
+    <p class="descriptionText">Welcome to your page</p>
   </div>
 </div>

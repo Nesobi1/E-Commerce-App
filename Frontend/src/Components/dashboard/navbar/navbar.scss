@@ -1,19 +1,162 @@
-.navbarDiv{
-  background-color: #222323;
+.navbarDiv {
+  background-color: var(--bg-primary);
   height: 50px;
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.searchBar{
+.searchWrapper {
+  position: relative;
   width: 40%;
-  height: 50%;
+}
+
+.searchBar {
+  width: 100%;
+  height: 30px;
   border-radius: 20px;
   padding-left: 20px;
-  background-color: #282828;
+  background-color: var(--bg-input);
   border: none;
-  color: #C7C7C7;
-  box-shadow: 5px 5px 10px black;
+  color: var(--text-primary);
+  box-shadow: 5px 5px 10px var(--shadow);
+  box-sizing: border-box;
+  outline: none;
+
+  &:focus {
+    border: 1px solid var(--border);
+  }
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+.searchDropdown {
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow);
+  z-index: 99999;
+}
+
+.dropdownSection {
+  padding: 8px 0;
+
+  & + .dropdownSection {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.sectionLabel {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 16px 6px;
+}
+
+.dropdownItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--bg-hover);
+  }
+}
+
+.itemName {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.itemMeta {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.buttonDiv {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cartButton {
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartIcon {
+  color: var(--text-primary);
+  font-size: 30px;
+
+  &:hover {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+  }
+}
+
+.cartBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #8b3333;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  line-height: 1;
+}
+
+.profileButton, .settingButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.profile, .gear {
+  color: var(--text-primary);
+  font-size: 30px;
+
+  &:hover {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+  }
+}
+
+.noResults {
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
 }

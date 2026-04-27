@@ -1,0 +1,199 @@
+.rmPage {
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.rmHeader {
+  margin-bottom: 1.5rem;
+  .rmTitle { font-size: 1.5rem; font-weight: 600; margin: 0 0 4px; }
+  .rmSub { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 700px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.statCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .statNum { font-size: 1.6rem; font-weight: 600; color: var(--text-primary); }
+  .statLabel { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  &.positive .statNum { color: #86efac; }
+  &.neutral  .statNum { color: #9ca3af; }
+  &.negative .statNum { color: #fca5a5; }
+}
+
+.filterRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+  &.active { background: var(--bg-hover); border-color: var(--text-primary); color: var(--text-primary); }
+}
+
+.emptyMsg { color: var(--text-secondary); font-size: 0.9rem; padding: 2rem 0; }
+
+.reviewCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+
+  .cardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .reviewLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .reviewMeta {
+      .reviewerEmail { font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 2px; }
+      .stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: 1px; }
+    }
+  }
+
+  .reviewRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+
+    .productName { font-size: 0.8rem; color: var(--text-secondary); }
+  }
+
+  .pill {
+    font-size: 0.72rem;
+    padding: 2px 9px;
+    border-radius: 20px;
+    &.positive { background: #052e16; color: #86efac; }
+    &.neutral  { background: #1c1c1c; color: #9ca3af; }
+    &.negative { background: #450a0a; color: #fca5a5; }
+  }
+
+  .reviewTitle { margin: 0 0 6px; font-size: 0.95rem; font-weight: 600; }
+  .reviewText  { margin: 0 0 1rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .existingResponse {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+
+    .responseLabel { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 4px; }
+    .responseText  { margin: 0 0 8px; font-size: 0.88rem; color: var(--text-primary); line-height: 1.6; }
+    .editResponseBtn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      cursor: pointer;
+      &:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+    }
+  }
+
+  .responseForm {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label { font-size: 0.8rem; color: var(--text-secondary); }
+
+    textarea {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      padding: 0.6rem 0.9rem;
+      font-size: 0.88rem;
+      font-family: inherit;
+      resize: vertical;
+      &:focus { outline: none; border-color: var(--text-secondary); }
+    }
+
+    .responseActions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  }
+
+  .respondBtn {
+    margin-top: 0.5rem;
+    padding: 6px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+  }
+
+  .cancelBtn {
+    padding: 6px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    &:hover { color: var(--text-primary); }
+  }
+
+  .saveBtn {
+    padding: 6px 16px;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover { opacity: 0.85; }
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+  }
+}

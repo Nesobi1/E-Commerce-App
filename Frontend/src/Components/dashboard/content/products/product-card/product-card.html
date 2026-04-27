@@ -1,9 +1,49 @@
 
 
-<div class="card">
-    <div class="cardText">
-      <h3>{{ product.name  }}</h3>
-      <p>{{ product.unitPrice }}</p>
-      <button class="detailButton cardText" [routerLink]="['/dashboard/product', product.id]">Get Details</button>
-    </div>
+<div class="card" [class.lowStock]="canManage && product.stock <= 10 && product.stock > 0"
+                  [class.outOfStock]="canManage && product.stock === 0">
+  <div class="cardBody">
+    <h3 class="productName">{{ product.name }}</h3>
+    <p class="productPrice">${{ product.unitPrice }}</p>
+
+    @if (canManage) {
+      <div class="stockRow">
+        @if (product.stock === 0) {
+          <span class="stockBadge out">Out of Stock</span>
+        } @else if (product.stock <= 10) {
+          <span class="stockBadge low">⚠ Low Stock — {{ product.stock }} left</span>
+        } @else {
+          <span class="stockBadge ok">{{ product.stock }} in stock</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="cardActions">
+    <button class="detailButton" [routerLink]="['/dashboard/product', product.id]">
+      View Details
+    </button>
+
+    @if (!canManage) {
+      <button class="cartButton" (click)="addToCart()" [class.added]="added">
+        {{ added ? '✓ Added' : '+ Add to Cart' }}
+      </button>
+    }
+
+    @if (canManage) {
+      <div class="manageActions">
+        <button class="editButton" (click)="onEdit.emit(product)">Edit</button>
+        <button class="deleteButton" (click)="onDelete.emit(product)">Delete</button>
+        <button class="stockButton" (click)="toggleStockEdit()">Stock</button>
+      </div>
+
+      @if (editingStock) {
+        <div class="stockEdit">
+          <input type="number" [(ngModel)]="stockValue" min="0" />
+          <button class="saveStockBtn" (click)="saveStock()">Save</button>
+          <button class="cancelStockBtn" (click)="editingStock = false">✕</button>
+        </div>
+      }
+    }
+  </div>
 </div>

@@ -1,0 +1,134 @@
+<div class="reviewPage">
+
+
+  <button class="backBtn" (click)="goBack()">← Back to product</button>
+
+  @if (product()) {
+    <div class="pageHeader">
+      <div>
+        <h1 class="productName">{{ product().name }}</h1>
+        <span class="productPrice">${{ product().unitPrice }}</span>
+      </div>
+      @if (reviews().length) {
+        <div class="ratingBadge">
+          <span class="avgNum">{{ avgRating | number:'1.1-1' }}</span>
+          <div class="stars">
+            @for (s of getStars(avgRating); track $index) {
+              <span class="star filled">★</span>
+            }
+          </div>
+          <span class="totalCount">{{ reviews().length }} reviews</span>
+        </div>
+      }
+    </div>
+  }
+
+  @if (reviews().length) {
+    <div class="card breakdownCard">
+      <h3 class="cardTitle">Rating breakdown</h3>
+      <div class="barRows">
+        @for (star of [5,4,3,2,1]; track star) {
+          <div class="barRow">
+            <span class="starLabel">{{ star }}★</span>
+            <div class="barTrack">
+              <div class="barFill" [style.width.%]="getBarPercent(star)"></div>
+            </div>
+            <span class="barCount">{{ getCount(star) }}</span>
+          </div>
+        }
+      </div>
+      <div class="sentimentRow">
+        @if (sentimentCounts.positive) {
+          <span class="badge positive">✓ {{ sentimentCounts.positive }} positive</span>
+        }
+        @if (sentimentCounts.neutral) {
+          <span class="badge neutral">~ {{ sentimentCounts.neutral }} neutral</span>
+        }
+        @if (sentimentCounts.negative) {
+          <span class="badge negative">✕ {{ sentimentCounts.negative }} negative</span>
+        }
+      </div>
+    </div>
+  }
+
+  @if (isCustomer && !showForm) {
+    <div class="writeBar">
+      @if (submitSuccess) {
+        <span class="successMsg">✓ Review submitted successfully!</span>
+      }
+      <button class="writeBtn" (click)="showForm = true">Write a Review</button>
+    </div>
+  }
+
+  @if (showForm) {
+    <div class="card formCard">
+      <h3 class="cardTitle">Your Review</h3>
+
+      <div class="formGroup">
+        <label>Rating</label>
+        <div class="starPicker">
+          @for (s of [1,2,3,4,5]; track s) {
+            <span
+              class="starPick"
+              [class.selected]="s <= newReview.star_rating"
+              [class.hovered]="s <= hoverRating"
+              (click)="newReview.star_rating = s"
+              (mouseenter)="hoverRating = s"
+              (mouseleave)="hoverRating = 0">★</span>
+          }
+        </div>
+      </div>
+
+      <div class="formGroup">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="newReview.title"
+               placeholder="Summarise your experience" maxlength="150" />
+      </div>
+
+      <div class="formGroup">
+        <label>Review</label>
+        <textarea [(ngModel)]="newReview.text" rows="5"
+                  placeholder="Tell others what you think about this product..."></textarea>
+      </div>
+
+      @if (formError) {
+        <div class="formError">{{ formError }}</div>
+      }
+
+      <div class="formActions">
+        <button class="cancelBtn" (click)="cancelForm()">Cancel</button>
+        <button class="submitBtn" (click)="submitReview()" [disabled]="submitting">
+          {{ submitting ? 'Submitting...' : 'Submit Review' }}
+        </button>
+      </div>
+    </div>
+  }
+
+  <div class="reviewsList">
+    @if (loading()) {
+      <div class="emptyMsg">Loading reviews...</div>
+    } @else if (!reviews().length) {
+      <div class="emptyMsg">No reviews yet. Be the first to review this product!</div>
+    } @else {
+      @for (review of reviews(); track review.id) {
+        <div class="card reviewCard">
+          <div class="reviewTop">
+            <div class="avatar">{{ getInitial(review.userEmail) }}</div>
+            <div class="reviewMeta">
+              <span class="reviewerName">{{ review.userEmail }}</span>
+              <div class="reviewStars">
+                @for (s of [1,2,3,4,5]; track s) {
+                  <span class="starSm" [class.filled]="s <= review.starRating">★</span>
+                }
+              </div>
+            </div>
+            <span class="pill" [ngClass]="review.sentiment">{{ review.sentiment }}</span>
+          </div>
+          <h4 class="reviewTitle">{{ review.title }}</h4>
+          <p class="reviewText">{{ review.text }}</p>
+        </div>
+      }
+    }
+  </div>
+
+</div>

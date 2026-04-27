@@ -1,0 +1,82 @@
+<div class="checkoutPage">
+  @if (success()) {
+    <div class="successState">
+      <div class="successIcon">✓</div>
+      <h2>Order Placed!</h2>
+      <p>Your order has been successfully placed.</p>
+      <button class="continueBtn" (click)="router.navigate(['/dashboard/products'])">
+        Continue Shopping
+      </button>
+    </div>
+  } @else {
+    <div class="pageHeader">
+      <h1>Checkout</h1>
+      <p>Review your order and complete your purchase</p>
+    </div>
+
+    @if (items().length === 0) {
+      <div class="emptyCart">
+        <p>Your cart is empty.</p>
+        <button class="continueBtn" routerLink="/dashboard/products">Browse Products</button>
+      </div>
+    } @else {
+      <div class="checkoutLayout">
+        <div class="cartSection">
+          <h2 class="sectionTitle">Your Cart</h2>
+          @for (item of items(); track item.productId) {
+            <div class="cartItem">
+              <div class="itemInfo">
+                <span class="itemName">{{ item.name }}</span>
+                <span class="itemPrice">${{ item.unitPrice }}</span>
+              </div>
+              <div class="itemControls">
+                <button class="qtyBtn" (click)="updateQuantity(item.productId, item.quantity - 1)">−</button>
+                <span class="qtyValue">{{ item.quantity }}</span>
+                <button class="qtyBtn" (click)="updateQuantity(item.productId, item.quantity + 1)">+</button>
+                <span class="itemTotal">${{ (item.unitPrice * item.quantity) | number:'1.2-2' }}</span>
+                <button class="removeBtn" (click)="removeItem(item.productId)">✕</button>
+              </div>
+            </div>
+          }
+          <div class="cartTotal">
+            <span>Total</span>
+            <span>${{ getTotal() | number:'1.2-2' }}</span>
+          </div>
+        </div>
+
+        <div class="formSection">
+          <h2 class="sectionTitle">Delivery & Payment</h2>
+
+          <div class="formGroup">
+            <label>Full Name</label>
+            <input type="text" [(ngModel)]="form.fullName" placeholder="John Doe" />
+          </div>
+          <div class="formGroup">
+            <label>Address</label>
+            <input type="text" [(ngModel)]="form.address" placeholder="123 Main St" />
+          </div>
+          <div class="formGroup">
+            <label>City</label>
+            <input type="text" [(ngModel)]="form.city" placeholder="New York" />
+          </div>
+          <div class="formGroup">
+            <label>Payment Method</label>
+            <select [(ngModel)]="form.paymentMethod">
+              <option value="CREDIT_CARD">Credit Card</option>
+              <option value="DEBIT_CARD">Debit Card</option>
+              <option value="PAYPAL">PayPal</option>
+            </select>
+          </div>
+          <div class="formGroup">
+            <label>Card Number</label>
+            <input type="text" [(ngModel)]="form.cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" />
+          </div>
+
+          <button class="placeOrderBtn" (click)="placeOrder()" [disabled]="loading()">
+            {{ loading() ? 'Placing Order...' : 'Place Order — $' + (getTotal() | number:'1.2-2') }}
+          </button>
+        </div>
+      </div>
+    }
+  }
+</div>

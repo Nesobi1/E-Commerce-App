@@ -1,11 +1,34 @@
 
-
 <div class="categoryProducts">
   <div class="categoryBar">
-    @for (category of categories(); track category.name) {
-      <a class="categories"  [routerLink]="['category', category.id]">{{ category.name }}</a>
+    <a class="categoryLink allLink"
+       [routerLink]="['category', 0]"
+       routerLinkActive="active"
+       >
+      All
+    </a>
+
+    @for (parent of categoryTree(); track parent.id) {
+      <a class="categoryLink parentLink"
+         [routerLink]="['category', parent.id]"
+         routerLinkActive="active">
+        {{ parent.name }}
+      </a>
+
+      @if (parent.children.length > 0) {
+        <div class="childGroup">
+          @for (child of parent.children; track child.id) {
+            <a class="categoryLink childLink"
+               [routerLink]="['category', child.id]"
+               routerLinkActive="active">
+              {{ child.name }}
+            </a>
+          }
+        </div>
+      }
     }
   </div>
+
   <div class="productPage">
     <router-outlet></router-outlet>
   </div>

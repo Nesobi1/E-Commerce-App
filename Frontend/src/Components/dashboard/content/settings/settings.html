@@ -1,0 +1,20 @@
+<div class="settingsPage">
+  <div class="pageHeader">
+    <h1>Settings</h1>
+    <p>Manage your preferences</p>
+  </div>
+
+  <div class="settingsCard">
+    <h3 class="sectionTitle">Appearance</h3>
+    <div class="settingRow">
+      <div class="settingInfo">
+        <span class="settingLabel">Dark Mode</span>
+        <span class="settingDesc">Switch between dark and light theme</span>
+      </div>
+      <button class="themeToggle" (click)="toggleTheme()">
+        @if (isDark()) { ☀️ Light Mode }
+        @else { 🌙 Dark Mode }
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="rmPage">
+
+  <div class="rmHeader">
+    <div>
+      <h1 class="rmTitle">Review Management</h1>
+      <p class="rmSub">{{ role === 'ADMIN' ? 'All platform reviews' : 'Reviews for your store products' }}</p>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="statsGrid">
+    <div class="statCard">
+      <span class="statNum">{{ stats.total }}</span>
+      <span class="statLabel">Total Reviews</span>
+    </div>
+    <div class="statCard positive">
+      <span class="statNum">{{ stats.positive }}</span>
+      <span class="statLabel">Positive</span>
+    </div>
+    <div class="statCard neutral">
+      <span class="statNum">{{ stats.neutral }}</span>
+      <span class="statLabel">Neutral</span>
+    </div>
+    <div class="statCard negative">
+      <span class="statNum">{{ stats.negative }}</span>
+      <span class="statLabel">Negative</span>
+    </div>
+    <div class="statCard">
+      <span class="statNum">{{ stats.responded }}</span>
+      <span class="statLabel">Responded</span>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filterRow">
+    <button class="filterBtn" [class.active]="filterSentiment === 'all'"    (click)="filterSentiment = 'all'">All</button>
+    <button class="filterBtn" [class.active]="filterSentiment === 'positive'" (click)="filterSentiment = 'positive'">Positive</button>
+    <button class="filterBtn" [class.active]="filterSentiment === 'neutral'"  (click)="filterSentiment = 'neutral'">Neutral</button>
+    <button class="filterBtn" [class.active]="filterSentiment === 'negative'" (click)="filterSentiment = 'negative'">Negative</button>
+  </div>
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="emptyMsg">Loading reviews...</div>
+  }
+
+  <!-- Empty -->
+  @if (!loading() && filteredReviews.length === 0) {
+    <div class="emptyMsg">No reviews found.</div>
+  }
+
+  <!-- Review Cards -->
+  @for (review of filteredReviews; track review.id) {
+    <div class="reviewCard">
+      <div class="cardTop">
+        <div class="reviewLeft">
+          <div class="avatar">{{ getInitial(review.userEmail) }}</div>
+          <div class="reviewMeta">
+            <span class="reviewerEmail">{{ review.userEmail }}</span>
+            <div class="stars">
+              @for (s of getStars(review.starRating); track $index) {
+                <span class="star">★</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="reviewRight">
+          <span class="productName">{{ review.productName }}</span>
+          <span class="pill" [ngClass]="review.sentiment">{{ review.sentiment }}</span>
+        </div>
+      </div>
+
+      <h4 class="reviewTitle">{{ review.title }}</h4>
+      <p class="reviewText">{{ review.text }}</p>
+
+      <!-- Existing response -->
+      @if (review.response && respondingId !== review.id) {
+        <div class="existingResponse">
+          <span class="responseLabel">Your response</span>
+          <p class="responseText">{{ review.response }}</p>
+          <button class="editResponseBtn" (click)="openRespond(review)">Edit Response</button>
+        </div>
+      }
+
+      <!-- Response form -->
+      @if (respondingId === review.id) {
+        <div class="responseForm">
+          <label>Your Response</label>
+          <textarea [(ngModel)]="responseText" rows="3"
+                    placeholder="Write a response to this review..."></textarea>
+          <div class="responseActions">
+            <button class="cancelBtn" (click)="cancelRespond()">Cancel</button>
+            <button class="saveBtn" (click)="saveResponse(review.id)" [disabled]="saving">
+              {{ saving ? 'Saving...' : 'Save Response' }}
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Respond button -->
+      @if (!review.response && respondingId !== review.id) {
+        <button class="respondBtn" (click)="openRespond(review)">Respond</button>
+      }
+    </div>
+  }
+
+</div>

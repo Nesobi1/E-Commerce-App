@@ -1,16 +1,41 @@
-
-<div class="chatbotPage #messagesContainer">
+<div class="chatbotPage" #messagesContainer>
   <div class="messages">
     <div class="spacerDiv"></div>
-    @for(message of messages(); track $index){
-      <p [class]="message.role === 'user' ? 'userMessage' : 'aiMessage'">{{ message.text }}</p>
+
+    @for (message of messages(); track $index) {
+      <div [class]="message.role === 'user' ? 'messageRow userRow' : 'messageRow aiRow'">
+
+        @if (message.role === 'ai') {
+          <div class="avatar aiAvatar">AI</div>
+        }
+
+        <div [class]="message.role === 'user' ? 'bubble userBubble' : 'bubble aiBubble'">
+          <p class="bubbleText">{{ message.text }}</p>
+          @if (message.chart && message.chartId) {
+            <div class="chartWrapper">
+              <canvas [id]="message.chartId"></canvas>
+            </div>
+          }
+        </div>
+
+        @if (message.role === 'user') {
+          <div class="avatar userAvatar">You</div>
+        }
+
+      </div>
     }
   </div>
 
-
-  <div class="inputField">
-    <input class="input" type="text" [(ngModel)]="text">
-    <button class="sendTextButton" (click)="onSend()"><i class="bi bi-arrow-right"></i></button>
+  <div class="inputBar">
+    <input
+      class="chatInput"
+      type="text"
+      [(ngModel)]="text"
+      (keyup.enter)="onSend()"
+      placeholder="Ask about your data..."
+    />
+    <button class="sendBtn" (click)="onSend()">
+      <i class="bi bi-arrow-right"></i>
+    </button>
   </div>
-
 </div>

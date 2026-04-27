@@ -1,6 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+:root {
+  --bg-base: #111212;
+  --bg-primary: #222323;
+  --bg-secondary: #1a1b1b;
+  --bg-tertiary: #181919;
+  --bg-card: #1e1f1f;
+  --bg-hover: #2a2b2b;
+  --bg-input: #282828;
+  --border: #363837;
+  --text-primary: #C7C7C7;
+  --text-secondary: #888;
+  --text-muted: #666;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+body.light {
+  --bg-base: #f0ebe3;
+  --bg-primary: #e4dfd7;
+  --bg-secondary: #ebe6de;
+  --bg-tertiary: #ddd8d0;
+  --bg-card: #f5f0e8;
+  --bg-hover: #d8d3cb;
+  --bg-input: #dedad2;
+  --border: #c4bfb7;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555;
+  --text-muted: #777;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
+body {
   margin: 0;
-  background-color: #222323;
+  background-color: var(--bg-primary);
   overflow: hidden;
+}
+
+* {
+  font-family: "Lexend", sans-serif;
 }

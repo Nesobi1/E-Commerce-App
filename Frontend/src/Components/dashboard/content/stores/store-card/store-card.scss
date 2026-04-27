@@ -1,24 +1,101 @@
-.card{
-  display: flex;
-  background-color: #CECCCC;
-  width: 300px;
-  height: 400px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  border-color: black;
-  border-width: 5px;
-  box-shadow: 10px 10px black;
-  opacity: 80%;
+.card {
+  width: 260px;
+  border-radius: 16px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px var(--shadow);
+    border-color: var(--text-muted);
+
+    .deleteBtn {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
 }
 
-.cardText{
+.cardInner {
+  position: relative;
+}
+
+.cardHeader {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storeIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(199, 199, 199, 0.15);
+  color: var(--text-primary);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--border);
+}
+
+.cardBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.storeName {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
   text-align: center;
-  width: 150px;
-  font-family: "Noto Sans Display", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 462;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+
+  &.open {
+    background: rgba(100, 100, 100, 0.2);
+    color: var(--text-secondary);
+  }
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(150, 60, 60, 0.8);
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+
+  &:hover {
+    background: #8b3333;
+  }
 }

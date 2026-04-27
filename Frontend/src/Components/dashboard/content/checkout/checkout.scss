@@ -1,0 +1,235 @@
+.checkoutPage {
+  padding: 32px;
+  padding-bottom: 60px;
+  min-height: 100%;
+  background: var(--bg-secondary);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.pageHeader {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+
+  h1 {
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.checkoutLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionTitle {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cartSection, .formSection {
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.itemName {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.itemPrice {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.itemControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qtyBtn {
+  width: 24px;
+  height: 24px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover { background: var(--border); }
+}
+
+.qtyValue {
+  color: var(--text-primary);
+  font-size: 14px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.itemTotal {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: right;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+
+  &:hover { color: #8b3333; }
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0 0;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  label {
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input, select {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+
+    &:focus { border-color: var(--text-muted); }
+  }
+
+  select option { background: var(--bg-primary); }
+}
+
+.placeOrderBtn {
+  width: 100%;
+  padding: 14px;
+  background: var(--bg-hover);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+
+  &:hover:not(:disabled) {
+    background: var(--border);
+    border-color: var(--text-muted);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+  text-align: center;
+
+  .successIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(80, 100, 80, 0.3);
+    border: 2px solid #8ab08a;
+    color: #8ab08a;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 { color: var(--text-primary); margin: 0; }
+  p { color: var(--text-secondary); margin: 0; }
+}
+
+.emptyCart {
+  text-align: center;
+  margin-top: 80px;
+  color: var(--text-secondary);
+
+  p { margin-bottom: 16px; }
+}
+
+.continueBtn {
+  padding: 10px 24px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover { background: var(--border); }
+}

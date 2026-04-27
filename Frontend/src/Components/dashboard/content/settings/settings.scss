@@ -1,0 +1,84 @@
+.settingsPage {
+  padding: 32px;
+  min-height: 100%;
+  background: var(--bg-secondary);
+  box-sizing: border-box;
+}
+
+.pageHeader {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+
+  h1 {
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.settingsCard {
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 600px;
+}
+
+.sectionTitle {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.settingRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.settingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settingLabel {
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.settingDesc {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.themeToggle {
+  padding: 10px 20px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--border);
+  }
+}

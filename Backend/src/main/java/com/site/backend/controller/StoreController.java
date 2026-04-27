@@ -3,6 +3,7 @@ package com.site.backend.controller;
 import com.site.backend.model.Store;
 import com.site.backend.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 import com.site.backend.dto.StoreDTO;
@@ -33,5 +34,12 @@ public class StoreController {
     @DeleteMapping("/{id}")
     public void deleteStore(@PathVariable int id) {
         storeRepository.deleteById(id);
+    }
+
+    @GetMapping("/owner/{ownerId}")
+    public ResponseEntity<StoreDTO> getStoreByOwner(@PathVariable int ownerId) {
+        return storeRepository.findByOwnerId(ownerId)
+                .map(store -> ResponseEntity.ok(new StoreDTO(store.getId(), store.getName(), store.getStatus())))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

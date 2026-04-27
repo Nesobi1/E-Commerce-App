@@ -1,4 +1,60 @@
 
 <div class="navbarDiv">
-  <input type="text" name="" id="" class="searchBar" placeholder="Search...">
+  <div class="searchWrapper">
+    <input
+      #searchInput
+      type="text"
+      class="searchBar"
+      placeholder="Search..."
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      autocomplete="off"
+    />
+  </div>
+
+  @if (showDropdown()) {
+    <div class="searchDropdown" [ngStyle]="dropdownStyle()">
+      @if (results().products.length === 0 && results().stores.length === 0) {
+        <div class="noResults">No results found for "{{ searchQuery }}"</div>
+      }
+      @if (results().products.length > 0) {
+        <div class="dropdownSection">
+          <span class="sectionLabel">Products</span>
+          @for (product of results().products; track product.id) {
+            <div class="dropdownItem" (click)="goToProduct(product.id)">
+              <span class="itemName">{{ product.name }}</span>
+              <span class="itemMeta">${{ product.unitPrice }}</span>
+            </div>
+          }
+        </div>
+      }
+      @if (results().stores.length > 0) {
+        <div class="dropdownSection">
+          <span class="sectionLabel">Stores</span>
+          @for (store of results().stores; track store.id) {
+            <div class="dropdownItem" (click)="goToStore(store.id)">
+              <span class="itemName">{{ store.name }}</span>
+              <span class="itemMeta">{{ store.status }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <div class="buttonDiv">
+    <button class="cartButton" routerLink="/dashboard/checkout">
+      @if (cartCount() > 0) {
+        <span class="cartBadge">{{ cartCount() }}</span>
+      }
+      <i class="bi bi-cart3 cartIcon"></i>
+
+    </button>
+    <button class="profileButton" routerLink="/dashboard/profile">
+      <i class="bi bi-person-circle profile"></i>
+    </button>
+    <button class="settingButton" routerLink="/dashboard/settings">
+      <i class="bi bi-gear gear"></i>
+    </button>
+  </div>
 </div>

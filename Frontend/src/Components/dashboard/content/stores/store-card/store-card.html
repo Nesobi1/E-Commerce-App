@@ -1,9 +1,18 @@
 
 
-
-<div class="card" [routerLink]="['/dashboard/store-products', store.id]" style="cursor: pointer;">
-    <div class="cardText">
-      <h3>{{ store.name }}</h3>
-      <p>{{ store.status }}</p>
+<div class="card" [routerLink]="['/dashboard/store-products', store.id]">
+  <div class="cardInner">
+    <div class="cardHeader" [style.background]="getGradient()">
+      <div class="storeIcon">{{ store.name.charAt(0) }}</div>
     </div>
+    <div class="cardBody">
+      <h3 class="storeName">{{ store.name }}</h3>
+      <span class="statusBadge" [class.open]="store.status === 'open'">
+        {{ store.status }}
+      </span>
+    </div>
+    @if (isAdmin) {
+      <button class="deleteBtn" (click)="delete($event)">✕</button>
+    }
+  </div>
 </div>

@@ -1,11 +1,78 @@
 
-@if (product()){
-  <div class="background">
-    <div class="card">
-        <div class="cardText">
-          <h3>{{ product().name  }}</h3>
-          <p>{{ product().unitPrice }}</p>
+@if (product()) {
+  <div class="detailPage">
+
+    <div class="productHeader">
+      <div class="headerLeft">
+        <h1 class="productName">{{ product().name }}</h1>
+        <p class="productPrice">${{ product().unitPrice }}</p>
+      </div>
+
+      @if (reviews()) {
+        <div class="ratingBadge">
+          <span class="ratingNumber">{{ reviews().averageRating }}</span>
+          <div class="stars">
+            @for (star of getStars(reviews().averageRating); track $index) {
+              <span class="star">★</span>
+            }
+          </div>
+          <span class="reviewCount">{{ reviews().totalReviews }} reviews</span>
         </div>
+      }
+    </div>
+
+    <div class="contentGrid">
+
+      @if (reviews()) {
+        <div class="card">
+          <h3 class="cardTitle">Rating breakdown</h3>
+          <div class="ratingRows">
+            @for (star of [5, 4, 3, 2, 1]; track star) {
+              <div class="ratingRow">
+                <span class="starLabel">{{ star }}★</span>
+                <div class="bar">
+                  <div class="barFill" [style.width.%]="getRatingPercent(star)"></div>
+                </div>
+                <span class="ratingRowCount">{{ getRatingCount(star) }}</span>
+              </div>
+            }
+          </div>
+
+          <div class="sentimentRow">
+            @if (reviews().sentimentBreakdown?.positive) {
+              <div class="sentimentBadge positive">✓ {{ reviews().sentimentBreakdown.positive }} positive</div>
+            }
+            @if (reviews().sentimentBreakdown?.neutral) {
+              <div class="sentimentBadge neutral">~ {{ reviews().sentimentBreakdown.neutral }} neutral</div>
+            }
+            @if (reviews().sentimentBreakdown?.negative) {
+              <div class="sentimentBadge negative">✕ {{ reviews().sentimentBreakdown.negative }} negative</div>
+            }
+          </div>
+
+          <button class="reviewsBtn" (click)="goToReviews()">
+            See All Reviews
+            @if (isCustomer) { · Write a Review }
+          </button>
+        </div>
+      }
+      @if ( !isCustomer ){
+        <div class="card chartCard">
+          <div class="chartHeader">
+            <h3 class="cardTitle">Monthly revenue</h3>
+            <div class="chartControls">
+              <div class="rangeButtons">
+                <button [class.active]="selectedRange === 3"  (click)="setRange(3)">3M</button>
+                <button [class.active]="selectedRange === 6"  (click)="setRange(6)">6M</button>
+                <button [class.active]="selectedRange === 12" (click)="setRange(12)">1Y</button>
+                <button [class.active]="selectedRange === 0"  (click)="setRange(0)">All</button>
+              </div>
+            </div>
+          </div>
+          <canvas id="revenueChart"></canvas>
+        </div>
+      }
+
     </div>
   </div>
 }
